@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "RRuleSwift",
-    platforms: [.iOS(.v9)],
+    platforms: [.iOS(.v8)],
     products: [
         .library(
             name: "RRuleSwift",
