@@ -1,9 +1,9 @@
-// swift-tools-version: 5.0
+// swift-tools-version:5.0
 import PackageDescription
 
 let package = Package(
     name: "RRuleSwift",
-    platforms: [.iOS(.v8)],
+    platforms: [.iOS(.v9)],
     products: [
         .library(
             name: "RRuleSwift",
