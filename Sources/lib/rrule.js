@@ -4,9 +4,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define([], factory);
 	else if(typeof exports === 'object')
-		exports["rrule"] = factory();
+		exports["RRule"] = factory();
 	else
-		root["rrule"] = factory();
+		root["RRule"] = factory();
 })(typeof self !== 'undefined' ? self : this, () => {
 return /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
