@@ -91,4 +91,54 @@ public extension RecurrenceRule {
 
         return occurrences.sorted { $0.isBeforeOrSame(with: $1) }
     }
+
+    func before(date: Date, inclusive: Bool = false) -> Date? {
+        guard let _ = JavaScriptBridge.rrulejs() else {
+            return nil
+        }
+
+        let dateJSON = RRule.ISO8601DateFormatter.string(from: date)
+
+        let ruleJSONString = toJSONString()
+        let _ = Iterator.rruleContext?.evaluateScript("var rule = new RRule({ \(ruleJSONString) })")
+        guard let nextOccurrence = Iterator.rruleContext?.evaluateScript("rule.before(new Date('\(dateJSON)'), \(inclusive.description))").toDate() else {
+            return nil
+        }
+        guard nextOccurrence > startDate else { return nil }
+
+        if let exdates = exdate?.dates, let component = exdate?.component {
+            for exdate in exdates {
+                if calendar.isDate(nextOccurrence, equalTo: exdate, toGranularity: component) {
+                    return before(date: nextOccurrence, inclusive: inclusive)
+                }
+            }
+        }
+
+        return nextOccurrence
+    }
+
+    func after(date: Date, inclusive: Bool = false) -> Date? {
+        guard let _ = JavaScriptBridge.rrulejs() else {
+            return nil
+        }
+
+        let dateJSON = RRule.ISO8601DateFormatter.string(from: date)
+
+        let ruleJSONString = toJSONString()
+        let _ = Iterator.rruleContext?.evaluateScript("var rule = new RRule({ \(ruleJSONString) })")
+        guard let nextOccurrence = Iterator.rruleContext?.evaluateScript("rule.after(new Date('\(dateJSON)'), \(inclusive.description))").toDate() else {
+            return nil
+        }
+        guard nextOccurrence > startDate else { return nil }
+
+        if let exdates = exdate?.dates, let component = exdate?.component {
+            for exdate in exdates {
+                if calendar.isDate(nextOccurrence, equalTo: exdate, toGranularity: component) {
+                    return after(date: nextOccurrence, inclusive: inclusive)
+                }
+            }
+        }
+
+        return nextOccurrence
+    }
 }
