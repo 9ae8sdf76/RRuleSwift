@@ -8,7 +8,7 @@
 
 import Foundation
 
-internal extension Date {
+extension Date {
     func isBefore(_ date: Date) -> Bool {
         return compare(date) == .orderedAscending
     }

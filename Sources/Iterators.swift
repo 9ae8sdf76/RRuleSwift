@@ -11,7 +11,7 @@ import JavaScriptCore
 
 public struct Iterator {
     public static let endlessRecurrenceCount = 500
-    internal static let rruleContext: JSContext? = {
+    static let rruleContext: JSContext? = {
         guard let rrulejs = JavaScriptBridge.rrulejs() else {
             return nil
         }

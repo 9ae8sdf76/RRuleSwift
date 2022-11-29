@@ -8,7 +8,7 @@
 
 import EventKit
 
-internal extension EKWeekday {
+extension EKWeekday {
     func toSymbol() -> String {
         switch self {
         case .monday: return "MO"
