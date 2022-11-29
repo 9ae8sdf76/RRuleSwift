@@ -32,7 +32,12 @@ public extension RecurrenceRule {
 
         let ruleJSONString = toJSONString(endless: endlessRecurrenceCount)
         let _ = Iterator.rruleContext?.evaluateScript("var rule = new RRule({ \(ruleJSONString) })")
-        guard let allOccurrences = Iterator.rruleContext?.evaluateScript("rule.all()").toArray() as? [Date] else {
+
+        guard let _ = Iterator.rruleContext?.evaluateScript("var rule = new RRule({ \(ruleJSONString) })") else {
+            return []
+        }
+
+        guard let allOccurrences = Iterator.rruleContext?.evaluateScript("rule.all()")?.toArray() as? [Date] else {
             return []
         }
 
@@ -44,8 +49,7 @@ public extension RecurrenceRule {
         if let exdates = exdate?.dates, let component = exdate?.component {
             for occurrence in occurrences {
                 for exdate in exdates {
-                    if calendar.isDate(occurrence, equalTo: exdate, toGranularity: component) {
-                        let index = occurrences.firstIndex(of: occurrence)!
+                    if calendar.isDate(occurrence, equalTo: exdate, toGranularity: component), let index = occurrences.index(of: occurrence) {
                         occurrences.remove(at: index)
                         break
                     }
@@ -80,8 +84,7 @@ public extension RecurrenceRule {
         if let exdates = exdate?.dates, let component = exdate?.component {
             for occurrence in occurrences {
                 for exdate in exdates {
-                    if calendar.isDate(occurrence, equalTo: exdate, toGranularity: component) {
-                        let index = occurrences.firstIndex(of: occurrence)!
+                    if calendar.isDate(occurrence, equalTo: exdate, toGranularity: component), let index = occurrences.index(of: occurrence) {
                         occurrences.remove(at: index)
                         break
                     }
