@@ -31,11 +31,9 @@ public struct RRule {
     }()
 
     public static func ruleFromString(_ string: String) -> RecurrenceRule? {
-        let string = string.trimmingCharacters(in: .whitespaces)
-        guard let range = string.range(of: "RRULE:"), range.lowerBound == string.startIndex else {
-            return nil
-        }
-        let ruleString = String(string.suffix(from: range.upperBound))
+        let string = string.trimmingCharacters(in: .whitespaces).replacingOccurrences(of: " RRULE:", with: ";").replacingOccurrences(of: "RRULE:", with: "")
+
+        let ruleString = String(string.suffix(from: string.startIndex))
         let rules = ruleString.components(separatedBy: ";").compactMap { (rule) -> String? in
             if rule.isEmpty {
                 return nil
@@ -80,6 +78,7 @@ public struct RRule {
                 }
             }
 
+            // Look Here !!!
             if ruleName == "UNTIL" {
                 if let endDate = dateFormatter.date(from: ruleValue) {
                     recurrenceRule.recurrenceEnd = EKRecurrenceEnd(end: endDate)
@@ -145,8 +144,8 @@ public struct RRule {
             if ruleName == "BYDAY" {
                 // These variables will define the weekdays where the recurrence will be applied.
                 // In the RFC documentation, it is specified as BYDAY, but was renamed to avoid the ambiguity of that argument.
-                let byweekday = ruleValue.components(separatedBy: ",").compactMap({ (string) -> EKWeekday? in
-                    return EKWeekday.weekdayFromSymbol(string)
+                let byweekday = ruleValue.components(separatedBy: ",").compactMap({ (string) -> ByDayValue? in
+                    return ByDayValue.byDayValueFromSymbol(string)
                 })
                 recurrenceRule.byweekday = byweekday.sorted(by: <)
             }
@@ -183,7 +182,9 @@ public struct RRule {
     }
 
     public static func stringFromRule(_ rule: RecurrenceRule) -> String {
-        var rruleString = "RRULE:"
+        var rruleString = "DTSTART=\(dateFormatter.string(from: rule.startDate as Date)) "
+        
+        rruleString += "RRULE:"
 
         rruleString += "FREQ=\(rule.frequency.toString());"
 
@@ -191,8 +192,6 @@ public struct RRule {
         rruleString += "INTERVAL=\(interval);"
 
         rruleString += "WKST=\(rule.firstDayOfWeek.toSymbol());"
-
-        rruleString += "DTSTART=\(dateFormatter.string(from: rule.startDate as Date));"
 
         if let endDate = rule.recurrenceEnd?.endDate {
             rruleString += "UNTIL=\(dateFormatter.string(from: endDate));"
@@ -250,8 +249,8 @@ public struct RRule {
             rruleString += "BYMONTHDAY=\(bymonthdayStrings.joined(separator: ","));"
         }
 
-        let byweekdaySymbols = rule.byweekday.map({ (weekday) -> String in
-            return weekday.toSymbol()
+        let byweekdaySymbols = rule.byweekday.map({ (byDayValue) -> String in
+            return byDayValue.toSymbol()
         })
         if byweekdaySymbols.count > 0 {
             rruleString += "BYDAY=\(byweekdaySymbols.joined(separator: ","));"

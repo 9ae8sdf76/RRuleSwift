@@ -15,7 +15,6 @@
 		EB48D1671D641D45001EE872 /* InclusionDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB48D1541D641D45001EE872 /* InclusionDate.swift */; };
 		EB48D1681D641D45001EE872 /* InclusionDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB48D1541D641D45001EE872 /* InclusionDate.swift */; };
 		EB48D1691D641D45001EE872 /* JavaScriptBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB48D1551D641D45001EE872 /* JavaScriptBridge.swift */; };
-		EB48D16B1D641D45001EE872 /* nlp.js in Resources */ = {isa = PBXBuildFile; fileRef = EB48D1571D641D45001EE872 /* nlp.js */; };
 		EB48D16D1D641D45001EE872 /* rrule.js in Resources */ = {isa = PBXBuildFile; fileRef = EB48D1581D641D45001EE872 /* rrule.js */; };
 		EB48D16F1D641D45001EE872 /* NSDate+Comparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB48D1591D641D45001EE872 /* NSDate+Comparison.swift */; };
 		EB48D1701D641D45001EE872 /* NSDate+Comparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB48D1591D641D45001EE872 /* NSDate+Comparison.swift */; };
@@ -37,7 +36,6 @@
 		EB48D1531D641D45001EE872 /* Iterators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Iterators.swift; sourceTree = "<group>"; };
 		EB48D1541D641D45001EE872 /* InclusionDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InclusionDate.swift; sourceTree = "<group>"; };
 		EB48D1551D641D45001EE872 /* JavaScriptBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JavaScriptBridge.swift; sourceTree = "<group>"; };
-		EB48D1571D641D45001EE872 /* nlp.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = nlp.js; sourceTree = "<group>"; };
 		EB48D1581D641D45001EE872 /* rrule.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = rrule.js; sourceTree = "<group>"; };
 		EB48D1591D641D45001EE872 /* NSDate+Comparison.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Comparison.swift"; sourceTree = "<group>"; };
 		EB48D15A1D641D45001EE872 /* RecurrenceFrequency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecurrenceFrequency.swift; sourceTree = "<group>"; };
@@ -105,7 +103,6 @@
 			isa = PBXGroup;
 			children = (
 				EB48D1581D641D45001EE872 /* rrule.js */,
-				EB48D1571D641D45001EE872 /* nlp.js */,
 			);
 			path = lib;
 			sourceTree = "<group>";
@@ -222,7 +219,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB48D16D1D641D45001EE872 /* rrule.js in Resources */,
-				EB48D16B1D641D45001EE872 /* nlp.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
