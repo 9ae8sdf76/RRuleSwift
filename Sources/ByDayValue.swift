@@ -32,27 +32,31 @@ public struct ByDayValue {
         return symbol
     }
 
-
     static func byDayValueFromSymbol(_ symbol: String) -> ByDayValue? {
         // MO, TU, ...
         if symbol.count == 2 {
-            var weekday = EKWeekday.weekdayFromSymbol(symbol)
-            if weekday != nil {
-                return ByDayValue(byweekday: weekday)
-            }
-            else {
+            guard let weekday = EKWeekday.weekdayFromSymbol(symbol) else {
                 return nil
             }
+
+            return ByDayValue(byweekday: weekday)
         }
 
         // -1MO, +3FR, 1SO, 13TU ...
-        let searchRegex : Regex = try Regex("^([+-]?\\d{1,3})(MO|TU|WE|TH|FR|SA|SU)$")
+        let daySuffixes = ["MO", "TU", "WE", "TH", "FR", "SA", "SU"]
+        let day = String(symbol.suffix(2))
 
-        if let result = try? searchRegex.wholeMatch(in: symbol) {
-            return ByDayValue(byweekday: EKWeekday.weekdayFromSymbol(result[2].value!), nth:  Int(result[1].value!))
-        } else {
+        if !daySuffixes.contains(day) {
             return nil
         }
-        
+
+        guard let wday = EKWeekday.weekdayFromSymbol(day) else {
+            return nil
+        }
+
+        let endIndex = symbol.index(symbol.endIndex, offsetBy: -2)
+        let nth = String(symbol[symbol.startIndex..<endIndex])
+
+        return ByDayValue(byweekday: wday, nth: nth.count > 0 ? Int(nth) : nil)
     }
 }
