@@ -60,7 +60,7 @@ public struct RecurrenceRule {
     public var bymonthday = [Int]()
 
     /// The days of the week associated with the recurrence rule, as an array of EKWeekday objects.
-    public var byweekday = [EKWeekday]()
+    public var byweekday = [ByDayValue]()
 
     /// The hours of the day associated with the recurrence rule, as an array of integers.
     public var byhour = [Int]()

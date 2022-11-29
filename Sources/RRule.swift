@@ -144,8 +144,8 @@ public struct RRule {
             if ruleName == "BYDAY" {
                 // These variables will define the weekdays where the recurrence will be applied.
                 // In the RFC documentation, it is specified as BYDAY, but was renamed to avoid the ambiguity of that argument.
-                let byweekday = ruleValue.components(separatedBy: ",").compactMap({ (string) -> EKWeekday? in
-                    return EKWeekday.weekdayFromSymbol(string)
+                let byweekday = ruleValue.components(separatedBy: ",").compactMap({ (string) -> ByDayValue? in
+                    return ByDayValue.byDayValueFromSymbol(string)
                 })
                 recurrenceRule.byweekday = byweekday.sorted(by: <)
             }
@@ -249,8 +249,8 @@ public struct RRule {
             rruleString += "BYMONTHDAY=\(bymonthdayStrings.joined(separator: ","));"
         }
 
-        let byweekdaySymbols = rule.byweekday.map({ (weekday) -> String in
-            return weekday.toSymbol()
+        let byweekdaySymbols = rule.byweekday.map({ (byDayValue) -> String in
+            return byDayValue.toSymbol()
         })
         if byweekdaySymbols.count > 0 {
             rruleString += "BYDAY=\(byweekdaySymbols.joined(separator: ","));"
