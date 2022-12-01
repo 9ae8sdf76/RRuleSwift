@@ -11,14 +11,7 @@ import EventKit
 
 struct JavaScriptBridge {
     static func rrulejs() -> String? {
-        
-        #if os(macOS)
-        let libPath = Bundle(identifier: "com.dezinezync.RRuleSwift-macOS")?.path(forResource: "rrule", ofType: "js") ?? Bundle.main.path(forResource: "rrule", ofType: "js")
-        #else
-        let libPath = Bundle(identifier: "Teambition.RRuleSwift-iOS")?.path(forResource: "rrule", ofType: "js") ?? Bundle.main.path(forResource: "rrule", ofType: "js")
-        #endif
-        
-        guard let rrulelibPath = libPath else {
+        guard let rrulelibPath = Bundle.main.path(forResource: "rrule", ofType: "js", inDirectory: "lib") else {
             return nil
         }
 
