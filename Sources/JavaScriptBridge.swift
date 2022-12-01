@@ -11,7 +11,7 @@ import EventKit
 
 struct JavaScriptBridge {
     static func rrulejs() -> String? {
-        guard let rrulelibPath = Bundle.main.path(forResource: "rrule", ofType: "js", inDirectory: "lib") else {
+        guard let rrulelibPath = Bundle.main.path(forResource: "rrule", ofType: "js", inDirectory: "RRuleSwift_RRuleSwift.bundle") else {
             return nil
         }
 

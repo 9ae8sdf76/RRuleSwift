@@ -14,7 +14,10 @@ let package = Package(
         .target(
             name: "RRuleSwift",
             dependencies: [],
-            path: "Sources/"
+            path: "Sources/",
+            resources: [
+                .process("lib/rrule.js")
+            ]
         )
     ]
 )
