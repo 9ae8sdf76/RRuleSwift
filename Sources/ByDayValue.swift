@@ -61,9 +61,9 @@ public struct ByDayValue {
     }
 }
 
-extension ByDayValue {
+extension ByDayValue: Comparable {
     static fileprivate var weekdayInts = ["MO": 1, "TU": 2, "WE": 3, "TH": 4, "FR": 5, "SA": 6, "SU": 7]
-    static func < (lhs: ByDayValue, rhs: ByDayValue) -> Bool {
+    public static func < (lhs: ByDayValue, rhs: ByDayValue) -> Bool {
         guard let leftSymbol = weekdayInts[String(lhs.toSymbol().suffix(2))] else {
             return false
         }
@@ -75,7 +75,7 @@ extension ByDayValue {
         return leftSymbol < rightSymbol
     }
 
-    static func > (lhs: ByDayValue, rhs: ByDayValue) -> Bool {
+    public static func > (lhs: ByDayValue, rhs: ByDayValue) -> Bool {
         guard let leftSymbol = weekdayInts[String(lhs.toSymbol().suffix(2))] else {
             return false
         }
@@ -87,7 +87,7 @@ extension ByDayValue {
         return leftSymbol > rightSymbol
     }
 
-    static func == (lhs: ByDayValue, rhs: ByDayValue) -> Bool {
+    public static func == (lhs: ByDayValue, rhs: ByDayValue) -> Bool {
         guard let leftSymbol = weekdayInts[String(lhs.toSymbol().suffix(2))] else {
             return false
         }
