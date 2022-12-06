@@ -144,4 +144,14 @@ public extension RecurrenceRule {
 
         return nextOccurrence
     }
+
+    func toText() -> String? {
+        guard let _ = JavaScriptBridge.rrulejs() else {
+            return nil
+        }
+
+        let ruleJSONString = toJSONString()
+        let _ = Iterator.rruleContext?.evaluateScript("var rule = new RRule({ \(ruleJSONString) })")
+        return Iterator.rruleContext?.evaluateScript("rule.toText()").toString()
+    }
 }
