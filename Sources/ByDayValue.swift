@@ -6,7 +6,6 @@ public struct ByDayValue {
     public var byweekday : EKWeekday
     public var nth: Int?
 
-
     public init(byweekday : EKWeekday, nth: Int? = nil) {
       self.byweekday = byweekday
       self.nth = nth
